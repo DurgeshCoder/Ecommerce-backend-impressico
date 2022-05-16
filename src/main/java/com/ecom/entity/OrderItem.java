@@ -1,11 +1,12 @@
 package com.ecom.entity;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
 @Entity
-@Data
+@NoArgsConstructor
 public class OrderItem {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,4 +19,10 @@ public class OrderItem {
 
     @ManyToOne
     private Order order;
+
+    public OrderItem(Product product, Integer quantity, Order order) {
+        this.product = product;
+        this.quantity = quantity;
+        this.order = order;
+    }
 }

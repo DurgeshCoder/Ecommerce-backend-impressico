@@ -1,5 +1,6 @@
-package com.ecom.entity;
+package com.ecom.payload;
 
+import com.ecom.entity.OrderItem;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -7,13 +8,9 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
-@Entity
-@Table(name = "ecom_order")
 @Data
-public class Order {
+public class OrderDto {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer orderId;
 
     private String orderStatus;
@@ -29,12 +26,7 @@ public class Order {
 
     private Date orderDelivered;
 
-    @OneToMany(mappedBy = "order",fetch = FetchType.EAGER,cascade = CascadeType.ALL,orphanRemoval = true)
-    Set<OrderItem> items = new HashSet<>();
+    Set<OrderItemDto> items = new HashSet<>();
 
-    @OneToOne
-    private User user;
 
-    public Order() {
-    }
 }
