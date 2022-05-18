@@ -35,5 +35,7 @@ public interface ProductService {
 
     // business
 
+    List<ProductDto> searchProduct(String titleKey);
+
 
 }

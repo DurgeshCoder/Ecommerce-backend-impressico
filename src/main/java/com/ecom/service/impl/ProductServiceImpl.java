@@ -93,4 +93,11 @@ public class ProductServiceImpl implements ProductService {
         return products.stream().map((product) -> this.modelMapper.map(product, ProductDto.class)).collect(Collectors.toList());
 
     }
+
+    @Override
+    public List<ProductDto> searchProduct(String titleKey) {
+        List<Product> products = this.productRepo.searchProducts("%" + titleKey + "%");
+        List<ProductDto> productDtos = products.stream().map(product -> this.modelMapper.map(product, ProductDto.class)).collect(Collectors.toList());
+        return productDtos;
+    }
 }

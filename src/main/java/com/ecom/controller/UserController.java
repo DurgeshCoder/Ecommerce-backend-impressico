@@ -44,4 +44,15 @@ public class UserController {
         UserDto userDto = this.userService.updateRole(userId, roles);
         return new ResponseEntity<>(userDto, HttpStatus.OK);
     }
+
+    @DeleteMapping("/users/{userId}")
+    public ResponseEntity<ApiResponse> deleteUsers(@PathVariable Integer userId) {
+        this.userService.deleteUser(userId);
+        ApiResponse apiResponse = new ApiResponse();
+        apiResponse.setStatus(HttpStatus.OK);
+        apiResponse.setSuccess(true);
+        apiResponse.setMessage("User deleted successfully !!");
+        return new ResponseEntity<>(apiResponse, HttpStatus.OK);
+    }
+
 }

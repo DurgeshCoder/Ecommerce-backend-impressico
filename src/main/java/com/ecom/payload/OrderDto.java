@@ -1,9 +1,7 @@
 package com.ecom.payload;
 
-import com.ecom.entity.OrderItem;
 import lombok.Data;
 
-import javax.persistence.*;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -26,7 +24,7 @@ public class OrderDto {
 
     private Date orderDelivered;
 
-    Set<OrderItemDto> items = new HashSet<>();
+    private  Set<OrderItemDto> items = new HashSet<>();
 
 
 }

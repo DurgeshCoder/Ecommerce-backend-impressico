@@ -48,10 +48,21 @@ public class UserServiceImpl implements UserService {
         User user = this.userRepository.findById(userId).orElseThrow(() -> new ResourceNotFoundException("User ", "user id ", userId + ""));
         Set<Role> roles1 = user.getRoles();
         roles1.clear();
-         roles1.addAll(roles.stream().map(roleDto -> this.modelMapper.map(roleDto,Role.class)).collect(Collectors.toSet()));
+        roles1.addAll(roles.stream().map(roleDto -> this.modelMapper.map(roleDto, Role.class)).collect(Collectors.toSet()));
         User save = this.userRepository.save(user);
         return this.modelMapper.map(save, UserDto.class);
 
 
+    }
+
+    @Override
+    public void deleteUser(Integer userId) {
+        User user = this.userRepository.findById(userId).orElseThrow(() -> new ResourceNotFoundException("user", "user id", userId + ""));
+
+//        user.getRoles().clear();
+//
+//        this.userRepository.save(user);
+
+        this.userRepository.delete(user);
     }
 }

@@ -94,5 +94,15 @@ public class ProductController {
         StreamUtils.copy(data, response.getOutputStream());
 
     }
+
+    @GetMapping("/products/search/{keywords}")
+    public ResponseEntity<List<ProductDto> > searchProducts(
+            @PathVariable String keywords
+
+    ) {
+        List<ProductDto> productDtos = this.productService.searchProduct(keywords);
+        return new ResponseEntity<>(productDtos, HttpStatus.OK);
+    }
+
 }
 

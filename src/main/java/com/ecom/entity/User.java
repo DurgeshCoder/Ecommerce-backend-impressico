@@ -38,11 +38,11 @@ public class User implements UserDetails {
 
     private Date date;
 
-    @OneToOne(mappedBy = "user",fetch = FetchType.LAZY)
+    @OneToOne(mappedBy = "user",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     private Cart cart;
 
 
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "user_role",
 
             joinColumns = @JoinColumn(name = "user", referencedColumnName = "id"),

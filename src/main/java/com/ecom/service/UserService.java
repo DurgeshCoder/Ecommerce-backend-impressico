@@ -11,4 +11,6 @@ public interface UserService {
     UserDto createUser(UserDto userDto);
 
     UserDto updateRole(Integer userId, List<RoleDto> roles);
+
+    void deleteUser(Integer userId);
 }

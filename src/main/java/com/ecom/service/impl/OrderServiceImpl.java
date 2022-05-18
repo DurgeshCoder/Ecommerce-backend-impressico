@@ -5,15 +5,19 @@ import com.ecom.entity.Order;
 import com.ecom.entity.OrderItem;
 import com.ecom.entity.User;
 import com.ecom.exception.ResourceNotFoundException;
+import com.ecom.payload.OrderDto;
 import com.ecom.payload.OrderRequest;
 import com.ecom.repository.CartRepo;
 import com.ecom.repository.OrderRepo;
 import com.ecom.repository.UserRepository;
 import com.ecom.service.OrderService;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.ModelMap;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -30,8 +34,11 @@ public class OrderServiceImpl implements OrderService {
     @Autowired
     private OrderRepo orderRepo;
 
+    @Autowired
+    private ModelMapper modelMapper;
+
     @Override
-    public void createOrder(OrderRequest request,String username) {
+    public void createOrder(OrderRequest request, String username) {
 
         //actual order create
 
@@ -67,6 +74,12 @@ public class OrderServiceImpl implements OrderService {
         this.cartRepo.save(cart);
 
 
+    }
 
+    @Override
+    public List<OrderDto> getOrders() {
+        List<Order> all = this.orderRepo.findAll();
+        List<OrderDto> data = all.stream().map((order -> this.modelMapper.map(order, OrderDto.class))).collect(Collectors.toList());
+        return data;
     }
 }
